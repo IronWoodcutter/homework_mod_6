@@ -1,3 +1,41 @@
+
+'''
+import os
+
+path = r'D:\Python'
+
+
+
+def get_folder_tree(path):
+    print(os.listdir(path))
+    for item in os.listdir(path):
+        if os.path.isdir(path + '\\' + item):
+            get_folder_tree(path + '\\' + item)
+            print(item, type(item), path + '\\' + item)
+
+
+
+get_folder_tree(path)
+
+'''
+
+
+# вывод перечня файлов в дереве каталогов с помощью рекурсии
+import sys, os
+def mylister(currdir):
+    print('[' + currdir + ']')
+    for file in os.listdir(currdir): # здесь получение списка файлов
+        path = os.path.join(currdir, file) # добавить путь к каталогу
+        if not os.path.isdir(path):
+            print(path)
+        else:
+            mylister(path) # рекурсия в подкаталоги
+
+if __name__ == '__main__':
+    mylister(r"D:\Python") # имя каталога в командной строке
+
+
+'''
 TRANS = {}
 
 
@@ -26,42 +64,26 @@ creating_dictionary()
 print(translate("фв_ ЧпкейЖ4З5ж"))
 
 
+def normalize(path):
+    pass
+'''
+def get_folder_tree():
+    pass
+
 '''
 import os
 
-main_path = 'd:\\down'
+main_path = r'd:\down'
 
 # key names will be folder names!
 extensions = {
 
-    'video': ['mp4', 'mov', 'avi', 'mkv', 'wmv', '3gp', '3g2', 'mpg', 'mpeg', 'm4v', 'h264', 'flv',
-              'rm', 'swf', 'vob'],
+    'images': ['jpeg', 'png', 'jpg','svg'],
+    'video': ['mp4', 'mov', 'avi', 'mkv'],
+    'documents': ['doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx'],
+    'audio': ['mp3', 'ogg', 'wav', 'amr'],
+    'archives': ['zip', 'gz', 'tar']
 
-    'data': ['sql', 'sqlite', 'sqlite3', 'csv', 'dat', 'db', 'log', 'mdb', 'sav', 'tar', 'xml'],
-
-    'audio': ['mp3', 'wav', 'ogg', 'flac', 'aif', 'mid', 'midi', 'mpa', 'wma', 'wpl', 'cda'],
-
-    'image': ['jpg', 'png', 'bmp', 'ai', 'psd', 'ico', 'jpeg', 'ps', 'svg', 'tif', 'tiff'],
-
-    'archive': ['zip', 'rar', '7z', 'z', 'gz', 'rpm', 'arj', 'pkg', 'deb'],
-
-    'text': ['pdf', 'txt', 'doc', 'docx', 'rtf', 'tex', 'wpd', 'odt'],
-
-    '3d': ['stl', 'obj', 'fbx', 'dae', '3ds', 'iges', 'step'],
-
-    'presentation': ['pptx', 'ppt', 'pps', 'key', 'odp'],
-
-    'spreadsheet': ['xlsx', 'xls', 'xlsm', 'ods'],
-
-    'font': ['otf', 'ttf', 'fon', 'fnt'],
-
-    'gif': ['gif'],
-
-    'exe': ['exe'],
-
-    'bat': ['bat'],
-
-    'apk': ['apk']
 }
 
 
