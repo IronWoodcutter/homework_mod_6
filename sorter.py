@@ -1,74 +1,41 @@
 
 '''
-import os
-
-path = r'D:\Python'
-
-
-
-def get_folder_tree(path):
-    print(os.listdir(path))
-    for item in os.listdir(path):
-        if os.path.isdir(path + '\\' + item):
-            get_folder_tree(path + '\\' + item)
-            print(item, type(item), path + '\\' + item)
-
-
-
-get_folder_tree(path)
-
+12
 '''
 
 
 # вывод перечня файлов в дереве каталогов с помощью рекурсии
-import sys, os
-def mylister(currdir):
-    print('[' + currdir + ']')
-    for file in os.listdir(currdir): # здесь получение списка файлов
-        path = os.path.join(currdir, file) # добавить путь к каталогу
+import os
+
+
+def mylister(current_dir):
+    print('[' + current_dir + ']')
+    # здесь получение списка файлов
+    for file in os.listdir(current_dir):
+        # добавить путь к каталогу
+        path = os.path.join(current_dir, file)
         if not os.path.isdir(path):
             print(path)
         else:
-            mylister(path) # рекурсия в подкаталоги
-
-if __name__ == '__main__':
-    mylister(r"D:\Python") # имя каталога в командной строке
+            mylister(path)  # рекурсия в подкаталоги
 
 
-'''
-TRANS = {}
+def translate_dict(name):
 
-
-def creating_dictionary():
+    TRANS = {}
     CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
     TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
                    "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
-
-    global TRANS
-    TRANS = {}
-
     for c, l in zip(CYRILLIC_SYMBOLS, TRANSLATION):
         TRANS[ord(c)] = l
         TRANS[ord(c.upper())] = l.upper()
-    return TRANS
 
-
-creating_dictionary()
-
-
-def translate(name):
     return name.translate(TRANS)
 
 
-creating_dictionary()
-print(translate("фв_ ЧпкейЖ4З5ж"))
-
-
-def normalize(path):
-    pass
-'''
-def get_folder_tree():
-    pass
+if __name__ == '__main__':
+    # имя каталога в командной строке
+    mylister(r'E:\shop')
 
 '''
 import os
