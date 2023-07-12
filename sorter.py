@@ -44,8 +44,8 @@ def normalize(name):
 
 def create_folder(untouchable_folders):
     for folder in untouchable_folders:
-        if not os.path.exists(f'{main_folder}\\{folder}'):
-            os.mkdir(f'{main_folder}\\{folder}')
+        if not os.path.exists(os.path.join(main_folder, folder)):
+            os.mkdir(os.path.join(main_folder, folder))
 
 # функція виявлення дублів файлів:
 
@@ -54,7 +54,7 @@ def duplication_check(new_path, norm_file_name, extension):
 
     n = '_'
     while True:
-        path = f'{new_path}\\{norm_file_name}.{extension}'
+        path = os.path.join(new_path, f'{norm_file_name}.{extension}')
         if os.path.exists(path):
             norm_file_name = f"{norm_file_name}{n}"
         else:
@@ -67,10 +67,10 @@ def duplication_check(new_path, norm_file_name, extension):
 
 def move(path, new_path, file_name, extension):
     norm_file_name = normalize(file_name)
-    if os.path.exists(f'{new_path}\\{norm_file_name}.{extension}'):
+    if os.path.exists(os.path.join(new_path, f'{norm_file_name}.{extension}')):
         norm_file_name = duplication_check(new_path, norm_file_name, extension)
 
-    shutil.move(path, f'{new_path}\\{norm_file_name}.{extension}')
+    shutil.move(path, os.path.join(new_path, f'{norm_file_name}.{extension}'))
     list_sorted_files.append(f'{norm_file_name}.{extension}')
     known_extensions.add(extension)
 
@@ -110,22 +110,23 @@ def sort(main_folder):
         extension = path.split('.')[-1]
 
         if extension in images:
-            new_path = f'{main_folder}\\images'
+            new_path = os.path.join(main_folder, 'images')
             move(path, new_path, file_name, extension)
 
         elif extension in video:
-            new_path = f'{main_folder}\\video'
+            new_path = os.path.join(main_folder, 'video')
             move(path, new_path, file_name, extension)
 
         elif extension in documents:
-            new_path = f'{main_folder}\\documents'
+            new_path = os.path.join(main_folder, 'documents')
             move(path, new_path, file_name, extension)
 
         elif extension in audio:
-            new_path = f'{main_folder}\\audio'
+            new_path = os.path.join(main_folder, 'audio')
             move(path, new_path, file_name, extension)
         elif extension in archives:
-            new_path = f'{main_folder}\\archives\\{normalize(file_name)}'
+            new_path = os.path.join(
+                main_folder, 'archives', normalize(file_name))
 
             if not os.path.exists(new_path):
                 os.mkdir(new_path)
